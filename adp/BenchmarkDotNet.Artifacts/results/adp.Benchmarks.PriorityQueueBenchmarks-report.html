@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>adp.Benchmarks.PriorityQueueBenchmarks-20241121-150337</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.14.0, Windows 11 (10.0.22631.4460/23H2/2023Update/SunValley3)
+Intel Core i7-9700K CPU 3.60GHz (Coffee Lake), 1 CPU, 8 logical and 8 physical cores
+.NET SDK 8.0.404
+  [Host] : .NET 8.0.11 (8.0.1124.51707), X64 RyuJIT AVX2
+</code></pre>
+<pre><code>Job=MediumRun  Toolchain=InProcessNoEmitToolchain  IterationCount=15  
+LaunchCount=2  WarmupCount=10  
+</code></pre>
+
+<table>
+<thead><tr><th>Method</th><th>ItemCount</th><th>Mean     </th><th>Error </th><th>StdDev</th>
+</tr>
+</thead><tbody><tr><td>AddElements</td><td>1000</td><td>5,461.3 ns</td><td>85.03 ns</td><td>121.95 ns</td>
+</tr><tr><td>PollElements</td><td>1000</td><td>70,668.0 ns</td><td>145.90 ns</td><td>209.24 ns</td>
+</tr><tr><td>PeekElement</td><td>1000</td><td>165.3 ns</td><td>2.61 ns</td><td>3.75 ns</td>
+</tr><tr><td>AddElements</td><td>10000</td><td>102,425.7 ns</td><td>527.70 ns</td><td>789.84 ns</td>
+</tr><tr><td>PollElements</td><td>10000</td><td>988,678.9 ns</td><td>2,656.02 ns</td><td>3,893.16 ns</td>
+</tr><tr><td>PeekElement</td><td>10000</td><td>1,205.6 ns</td><td>22.43 ns</td><td>31.45 ns</td>
+</tr><tr><td>AddElements</td><td>100000</td><td>1,156,582.1 ns</td><td>2,512.61 ns</td><td>3,603.51 ns</td>
+</tr><tr><td>PollElements</td><td>100000</td><td>12,633,514.9 ns</td><td>28,408.24 ns</td><td>41,640.43 ns</td>
+</tr><tr><td>PeekElement</td><td>100000</td><td>25,796.2 ns</td><td>241.52 ns</td><td>346.38 ns</td>
+</tr></tbody></table>
+</body>
+</html>
