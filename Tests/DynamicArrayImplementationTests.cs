@@ -1,4 +1,6 @@
 using adp;
+using System;
+using Xunit;
 
 namespace Tests;
 
@@ -159,4 +161,45 @@ public class DynamicArrayImplementationTests
         Assert.Equal(99, dynamicArray.Get(99)); // Last element added
         Assert.Equal(50, dynamicArray.Get(50)); // Check middle element
     }
+
+    [Fact]
+    public void Contains_ShouldWorkForComplexObjects()
+    {
+        // Arrange
+        var dynamicArray = new DynamicArrayImplementation<Pizza>();
+        dynamicArray.Add(new Pizza { pizzaName = "Margherita", numberOfSlices = 8 });
+        dynamicArray.Add(new Pizza { pizzaName = "Pepperoni", numberOfSlices = 10 });
+
+        var pizzaToFind = new Pizza { pizzaName = "Margherita", numberOfSlices = 8 };
+
+        // Act
+        var contains = dynamicArray.Contains(pizzaToFind);
+
+        // Assert
+        Assert.True(contains);
+    }
+
+    [Fact]
+    public void IndexOf_ShouldWorkForComplexObjects()
+    {
+        // Arrange
+        var dynamicArray = new DynamicArrayImplementation<Pizza>();
+        dynamicArray.Add(new Pizza { pizzaName = "Margherita", numberOfSlices = 8 });
+        dynamicArray.Add(new Pizza { pizzaName = "Pepperoni", numberOfSlices = 10 });
+
+        var pizzaToFind = new Pizza { pizzaName = "Pepperoni", numberOfSlices = 10 };
+
+        // Act
+        var index = dynamicArray.IndexOf(pizzaToFind);
+
+        // Assert
+        Assert.Equal(1, index);
+    }
+}
+
+// Updated Pizza Class for Tests
+public class Pizza
+{
+    public string pizzaName { get; set; }
+    public int numberOfSlices { get; set; }
 }

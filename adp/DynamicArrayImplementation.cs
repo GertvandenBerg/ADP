@@ -41,7 +41,7 @@ public class DynamicArrayImplementation<T>
     {
         for (int i = 0; i < _size; i++)
         {
-            if (_array[i]!.Equals(element))
+            if (_array[i]!.AreEqual(element))
             {
                 return true;
             }
