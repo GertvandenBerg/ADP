@@ -27,16 +27,12 @@ public class DequeImplementation<T>
         _size = 0;
     }
 
-    /// <summary>
-    /// Inserts an element at the front (left end) of the deque.
-    /// </summary>
     public void InsertLeft(T item)
     {
         var newNode = new Node(item);
 
         if (_head == null)
         {
-            // Deque is empty
             _head = _tail = newNode;
         }
         else
@@ -49,16 +45,12 @@ public class DequeImplementation<T>
         _size++;
     }
 
-    /// <summary>
-    /// Inserts an element at the back (right end) of the deque.
-    /// </summary>
     public void InsertRight(T item)
     {
         var newNode = new Node(item);
 
         if (_tail == null)
         {
-            // Deque is empty
             _head = _tail = newNode;
         }
         else
@@ -71,9 +63,6 @@ public class DequeImplementation<T>
         _size++;
     }
 
-    /// <summary>
-    /// Removes and returns the element from the front (left end) of the deque.
-    /// </summary>
     public T DeleteLeft()
     {
         if (_head == null)
@@ -85,15 +74,12 @@ public class DequeImplementation<T>
         if (_head != null)
             _head.Prev = null;
         else
-            _tail = null; // Deque is now empty
+            _tail = null;
 
         _size--;
         return data;
     }
 
-    /// <summary>
-    /// Removes and returns the element from the back (right end) of the deque.
-    /// </summary>
     public T DeleteRight()
     {
         if (_tail == null)
@@ -105,15 +91,12 @@ public class DequeImplementation<T>
         if (_tail != null)
             _tail.Next = null;
         else
-            _head = null; // Deque is now empty
+            _head = null;
 
         _size--;
         return data;
     }
 
-    /// <summary>
-    /// Returns the number of elements in the deque.
-    /// </summary>
     public int Size()
     {
         return _size;
