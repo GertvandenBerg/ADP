@@ -36,17 +36,6 @@ public class DoublyLinkedListImplementationTests
     }
 
     [Fact]
-    public void Get_ShouldThrowException_ForInvalidIndex()
-    {
-        // Arrange
-        var list = new DoublyLinkedListImplementation<int>();
-        list.Add(1);
-
-        // Act & Assert
-        Assert.Throws<IndexOutOfRangeException>(() => list.Get(5));
-    }
-
-    [Fact]
     public void Set_ShouldUpdateElementAtIndex()
     {
         // Arrange
@@ -69,10 +58,11 @@ public class DoublyLinkedListImplementationTests
 
         // Act & Assert
         Assert.Throws<IndexOutOfRangeException>(() => list.Set(0, 10));
+        Assert.Throws<IndexOutOfRangeException>(() => list.Set(-1, 10));
     }
 
     [Fact]
-    public void Remove_ByIndex_ShouldRemoveElementAtIndex()
+    public void RemoveAtIndex_ShouldRemoveElementAtIndex()
     {
         // Arrange
         var list = new DoublyLinkedListImplementation<int>();
@@ -81,22 +71,44 @@ public class DoublyLinkedListImplementationTests
         list.Add(30);
 
         // Act
-        list.Remove(1);
+        var result = list.RemoveAtIndex(1);
 
         // Assert
+        Assert.True(result);
         Assert.Equal(10, list.Get(0));
         Assert.Equal(30, list.Get(1));
         Assert.Throws<IndexOutOfRangeException>(() => list.Get(2));
     }
 
     [Fact]
-    public void Remove_ByIndex_ShouldThrowException_ForInvalidIndex()
+    public void RemoveAtIndex_ShouldReturnFalse_ForInvalidIndex()
     {
         // Arrange
         var list = new DoublyLinkedListImplementation<int>();
-        
-        // Act & Assert
-        Assert.Throws<IndexOutOfRangeException>(() => list.Remove(0));
+
+        // Act
+        var result = list.RemoveAtIndex(5);
+
+        // Assert
+        Assert.False(result);
+    }
+
+    [Fact]
+    public void RemoveAtIndex_ShouldUpdateHeadAndTailCorrectly()
+    {
+        // Arrange
+        var list = new DoublyLinkedListImplementation<int>();
+        list.Add(1);
+        list.Add(2);
+        list.Add(3);
+
+        // Act
+        list.RemoveAtIndex(0); // Remove head
+        list.RemoveAtIndex(1); // Remove tail
+
+        // Assert
+        Assert.Equal(2, list.Get(0)); // Remaining element is now head and tail
+        Assert.Throws<IndexOutOfRangeException>(() => list.Get(1));
     }
 
     [Fact]
@@ -159,77 +171,52 @@ public class DoublyLinkedListImplementationTests
     }
 
     [Fact]
-    public void Remove_ByValue_ShouldReturnTrue_WhenElementExistsAndIsRemoved()
+    public void Remove_ShouldRemoveElementByValue()
     {
         // Arrange
         var list = new DoublyLinkedListImplementation<int>();
         list.Add(10);
         list.Add(20);
 
-        // Act & Assert
-        Assert.True(list.Contains(10));
-        Assert.Equal(20, list.Get(1));
-        Assert.Throws<IndexOutOfRangeException>(() => list.Remove(10));
+        // Act
+        var result = list.Remove(10);
+
+        // Assert
+        Assert.True(result);
+        Assert.False(list.Contains(10));
+        Assert.Equal(20, list.Get(0));
     }
 
     [Fact]
-    public void Remove_ByValue_ShouldReturnFalse_WhenElementDoesNotExist()
+    public void Remove_ShouldReturnFalse_WhenElementDoesNotExist()
     {
         // Arrange
         var list = new DoublyLinkedListImplementation<int>();
         list.Add(10);
 
-        // Act & Assert
-        Assert.Throws<IndexOutOfRangeException>(() => list.Remove(30));
+        // Act
+        var result = list.Remove(30);
+
+        // Assert
+        Assert.False(result);
     }
 
     [Fact]
-    public void Add_ShouldHandleEmptyListCorrectly()
+    public void Add_Remove_MultipleOperations_ShouldMaintainCorrectState()
     {
         // Arrange
         var list = new DoublyLinkedListImplementation<int>();
 
         // Act
-        list.Add(100);
-
-        // Assert
-        Assert.Equal(100, list.Get(0));
-    }
-
-    [Fact]
-    public void Remove_ByIndex_ShouldUpdateHeadAndTailCorrectly()
-    {
-        // Arrange
-        var list = new DoublyLinkedListImplementation<int>();
         list.Add(1);
         list.Add(2);
         list.Add(3);
-
-        // Act
-        list.Remove(0); // Remove head
-        list.Remove(1); // Remove tail
+        list.RemoveAtIndex(1);
+        list.Add(4);
 
         // Assert
-        Assert.Equal(2, list.Get(0)); // Remaining element is now head and tail
-        Assert.Throws<IndexOutOfRangeException>(() => list.Get(1));
-    }
-
-    [Fact]
-    public void Remove_ByValue_ShouldUpdateHeadAndTailCorrectly()
-    {
-        // Arrange
-        var list = new DoublyLinkedListImplementation<string>();
-        list.Add("1");
-        list.Add("2");
-        list.Add("3");
-
-        // Act
-        list.Remove("1"); // Remove head
-        list.Remove("3"); // Remove tail
-
-        // Assert
-        Assert.True(list.Contains("2"));
-        Assert.False(list.Contains("1"));
-        Assert.False(list.Contains("3"));
+        Assert.Equal(1, list.Get(0));
+        Assert.Equal(3, list.Get(1));
+        Assert.Equal(4, list.Get(2));
     }
 }

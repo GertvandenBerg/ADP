@@ -24,7 +24,7 @@ public class DoublyLinkedListImplementation<T>
         _head = null;
         _tail = null;
     }
-    
+
     public void Add(T data)
     {
         var newNode = new Node(data);
@@ -43,7 +43,7 @@ public class DoublyLinkedListImplementation<T>
             _tail = newNode;
         }
     }
-    
+
     public T Get(int index)
     {
         var current = _head;
@@ -53,17 +53,18 @@ public class DoublyLinkedListImplementation<T>
             {
                 throw new IndexOutOfRangeException();
             }
+
             current = current.Next;
         }
-        
+
         if (current == null)
         {
             throw new IndexOutOfRangeException();
         }
-        
+
         return current.Data;
     }
-    
+
     public void Set(int index, T data)
     {
         var current = _head;
@@ -73,34 +74,39 @@ public class DoublyLinkedListImplementation<T>
             {
                 throw new IndexOutOfRangeException();
             }
+
             current = current.Next;
         }
-        
+
         if (current == null)
         {
             throw new IndexOutOfRangeException();
         }
-        
+
         current.Data = data;
     }
 
-    public void Remove(int index)
+    public bool RemoveAtIndex(int index)
     {
+        if (_head == null)
+            return false;
+
         var current = _head;
         for (var i = 0; i < index; i++)
         {
             if (current == null)
             {
-                throw new IndexOutOfRangeException();
+                return false;
             }
+
             current = current.Next;
         }
-        
+
         if (current == null)
         {
-            throw new IndexOutOfRangeException();
+            return false;
         }
-        
+
         if (current.Prev != null)
         {
             current.Prev.Next = current.Next;
@@ -118,6 +124,8 @@ public class DoublyLinkedListImplementation<T>
         {
             _tail = current.Prev;
         }
+
+        return true;
     }
 
     public bool Contains(T data)
@@ -125,28 +133,32 @@ public class DoublyLinkedListImplementation<T>
         var current = _head;
         while (current != null)
         {
-            if (current.Data != null && current.Data.Equals(data))
+            if (current.Data != null && current.Data.AreEqual(data))
             {
                 return true;
             }
+
             current = current.Next;
         }
+
         return false;
     }
-    
+
     public int IndexOf(T data)
     {
         var current = _head;
         var index = 0;
         while (current != null)
         {
-            if (current.Data != null && current.Data.Equals(data))
+            if (current.Data != null && current.Data.AreEqual(data))
             {
                 return index;
             }
+
             current = current.Next;
             index++;
         }
+
         return -1;
     }
 
@@ -155,7 +167,7 @@ public class DoublyLinkedListImplementation<T>
         var current = _head;
         while (current != null)
         {
-            if (current.Data != null && current.Data.Equals(data))
+            if (current.Data != null && current.Data.AreEqual(data))
             {
                 if (current.Prev != null)
                 {
@@ -163,7 +175,7 @@ public class DoublyLinkedListImplementation<T>
                 }
                 else
                 {
-                    _head = current.Next; // Update head if the first node is removed
+                    _head = current.Next;
                 }
 
                 if (current.Next != null)
@@ -172,13 +184,15 @@ public class DoublyLinkedListImplementation<T>
                 }
                 else
                 {
-                    _tail = current.Prev; // Update tail if the last node is removed
+                    _tail = current.Prev;
                 }
 
                 return true;
             }
+
             current = current.Next;
         }
-        return false; // Data not found
+
+        return false;
     }
 }
