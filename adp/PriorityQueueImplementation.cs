@@ -1,134 +1,110 @@
 namespace adp;
 
-public class PriorityQueueImplementation<T> where T : IComparable<T>
+public class PriorityQueueItem<T>
 {
-    private T[] _queue;
+    public int Priority { get; set; }
+    public T Value { get; set; }
+
+    public PriorityQueueItem(int priority, T value)
+    {
+        Priority = priority;
+        Value = value;
+    }
+}
+
+public class PriorityQueueImplementation<T>
+{
+    private PriorityQueueItem<T>[] _queue;
     private int _size;
 
-    /// <summary>
-    /// Initializes a priority queue with a specified initial capacity.
-    /// </summary>
-    public PriorityQueueImplementation(int initialCapacity = 16)
+    public PriorityQueueImplementation()
     {
-        if (initialCapacity <= 0)
-        {
-            throw new ArgumentException("Initial capacity must be greater than 0.");
-        }
-
-        _queue = new T[initialCapacity];
+        _queue = new PriorityQueueItem<T>[2];
         _size = 0;
     }
 
-    /// <summary>
-    /// Adds an element to the priority queue.
-    /// </summary>
-    public void Add(T element)
+    public void Add(T value, int priority)
     {
-        if (_size == _queue.Length)
+        EnsureCapacity();
+
+        var newItem = new PriorityQueueItem<T>(priority, value);
+        int index = _size;
+
+        while (index > 0 && _queue[index - 1].Priority > priority)
         {
-            Resize(_queue.Length * 2);
+            _queue[index] = _queue[index - 1];
+            index--;
         }
 
-        _queue[_size] = element;
-        BubbleUp(_size);
+        _queue[index] = newItem;
         _size++;
     }
 
-    /// <summary>
-    /// Returns the element with the highest priority without removing it.
-    /// </summary>
     public T Peek()
     {
-        if (_size == 0)
+        if (IsEmpty())
         {
             throw new InvalidOperationException("Priority Queue is empty.");
         }
 
-        return _queue[0];
+        return _queue[0].Value;
     }
 
-    /// <summary>
-    /// Removes and returns the element with the highest priority.
-    /// </summary>
     public T Poll()
     {
-        if (_size == 0)
+        if (IsEmpty())
         {
             throw new InvalidOperationException("Priority Queue is empty.");
         }
 
-        T highestPriority = _queue[0];
-        _queue[0] = _queue[_size - 1];
-        _size--;
-        BubbleDown(0);
+        var highestPriorityItem = _queue[0];
 
-        // Optionally shrink the array if it's less than a quarter full
+        for (int i = 1; i < _size; i++)
+        {
+            _queue[i - 1] = _queue[i];
+        }
+
+        _queue[_size - 1] = null;
+        _size--;
+
+        ShrinkCapacityIfNeeded();
+        return highestPriorityItem.Value;
+    }
+
+    public int Size()
+    {
+        return _size;
+    }
+
+    public bool IsEmpty()
+    {
+        return _size == 0;
+    }
+
+    private void EnsureCapacity()
+    {
+        if (_size >= _queue.Length)
+        {
+            Resize(_queue.Length * 2);
+        }
+    }
+
+    private void ShrinkCapacityIfNeeded()
+    {
         if (_size > 0 && _size <= _queue.Length / 4)
         {
             Resize(_queue.Length / 2);
         }
-
-        return highestPriority;
-    }
-
-    /// <summary>
-    /// Returns the number of elements in the priority queue.
-    /// </summary>
-    public int Size() => _size;
-
-    /// <summary>
-    /// Checks if the priority queue is empty.
-    /// </summary>
-    public bool IsEmpty() => _size == 0;
-
-    private void BubbleUp(int index)
-    {
-        while (index > 0)
-        {
-            int parentIndex = (index - 1) / 2;
-
-            if (_queue[index].CompareTo(_queue[parentIndex]) >= 0)
-            {
-                break;
-            }
-
-            SwapElements(index, parentIndex);
-            index = parentIndex;
-        }
-    }
-
-    private void BubbleDown(int index)
-    {
-        while (index < _size / 2)
-        {
-            int leftChildIndex = 2 * index + 1;
-            int rightChildIndex = 2 * index + 2;
-
-            int smallerChildIndex = leftChildIndex;
-            if (rightChildIndex < _size && _queue[rightChildIndex].CompareTo(_queue[leftChildIndex]) < 0)
-            {
-                smallerChildIndex = rightChildIndex;
-            }
-
-            if (_queue[index].CompareTo(_queue[smallerChildIndex]) <= 0)
-            {
-                break;
-            }
-
-            SwapElements(index, smallerChildIndex);
-            index = smallerChildIndex;
-        }
-    }
-
-    private void SwapElements(int i, int j)
-    {
-        (_queue[i], _queue[j]) = (_queue[j], _queue[i]);
     }
 
     private void Resize(int newCapacity)
     {
-        T[] newQueue = new T[newCapacity];
-        Array.Copy(_queue, newQueue, _size);
+        var newQueue = new PriorityQueueItem<T>[newCapacity];
+        for (int i = 0; i < _size; i++)
+        {
+            newQueue[i] = _queue[i];
+        }
+
         _queue = newQueue;
     }
 }

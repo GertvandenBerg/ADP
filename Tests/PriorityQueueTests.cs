@@ -1,151 +1,95 @@
 using adp;
+using Xunit;
 
 namespace Tests;
 
-public class PriorityQueueTests
+public class PriorityQueueImplementationTests
 {
     [Fact]
-    public void Add_ShouldInsertElementsInPriorityOrder()
+    public void AddAndPeek_ShouldReturnHighestPriorityElement()
     {
-        // Arrange
-        var pq = new PriorityQueueImplementation<int>(5);
+        var queue = new PriorityQueueImplementation<string>();
+        queue.Add("Low Priority Task", 5);
+        queue.Add("High Priority Task", 1);
+        queue.Add("Medium Priority Task", 3);
 
-        // Act
-        pq.Add(10);
-        pq.Add(5);
-        pq.Add(20);
-        pq.Add(1);
-
-        // Assert
-        Assert.Equal(1, pq.Peek());
-    }
-
-    [Fact]
-    public void Peek_ShouldReturnHighestPriorityElementWithoutRemoving()
-    {
-        // Arrange
-        var pq = new PriorityQueueImplementation<int>(5);
-        pq.Add(15);
-        pq.Add(10);
-        pq.Add(5);
-
-        // Act
-        var peeked = pq.Peek();
-
-        // Assert
-        Assert.Equal(5, peeked);
-        Assert.Equal(3, pq.Size()); // Ensure size remains unchanged
+        Assert.Equal("High Priority Task", queue.Peek());
     }
 
     [Fact]
     public void Poll_ShouldReturnAndRemoveHighestPriorityElement()
     {
-        // Arrange
-        var pq = new PriorityQueueImplementation<int>(5);
-        pq.Add(30);
-        pq.Add(20);
-        pq.Add(10);
+        var queue = new PriorityQueueImplementation<string>();
+        queue.Add("Low Priority Task", 5);
+        queue.Add("High Priority Task", 1);
+        queue.Add("Medium Priority Task", 3);
 
-        // Act
-        var polled = pq.Poll();
-
-        // Assert
-        Assert.Equal(10, polled);
-        Assert.Equal(20, pq.Peek()); // Ensure next highest-priority element is now at the top
-        Assert.Equal(2, pq.Size()); // Ensure size is decremented
-    }
-
-    [Fact]
-    public void Add_ShouldThrowException_WhenCapacityIsExceeded()
-    {
-        // Arrange
-        var pq = new PriorityQueueImplementation<int>(2);
-        pq.Add(10);
-        pq.Add(20);
-
-        // Act & Assert
-        Assert.Throws<InvalidOperationException>(() => pq.Add(30));
-    }
-
-    [Fact]
-    public void Peek_ShouldThrowException_WhenPriorityQueueIsEmpty()
-    {
-        // Arrange
-        var pq = new PriorityQueueImplementation<int>(5);
-
-        // Act & Assert
-        Assert.Throws<InvalidOperationException>(() => pq.Peek());
-    }
-
-    [Fact]
-    public void Poll_ShouldThrowException_WhenPriorityQueueIsEmpty()
-    {
-        // Arrange
-        var pq = new PriorityQueueImplementation<int>(5);
-
-        // Act & Assert
-        Assert.Throws<InvalidOperationException>(() => pq.Poll());
-    }
-
-    [Fact]
-    public void IsEmpty_ShouldReturnTrue_WhenQueueIsEmpty()
-    {
-        // Arrange
-        var pq = new PriorityQueueImplementation<int>(5);
-
-        // Act
-        var isEmpty = pq.IsEmpty();
-
-        // Assert
-        Assert.True(isEmpty);
-    }
-
-    [Fact]
-    public void IsEmpty_ShouldReturnFalse_WhenQueueIsNotEmpty()
-    {
-        // Arrange
-        var pq = new PriorityQueueImplementation<int>(5);
-        pq.Add(10);
-
-        // Act
-        var isEmpty = pq.IsEmpty();
-
-        // Assert
-        Assert.False(isEmpty);
+        Assert.Equal("High Priority Task", queue.Poll());
+        Assert.Equal("Medium Priority Task", queue.Poll());
+        Assert.Equal("Low Priority Task", queue.Poll());
+        Assert.True(queue.IsEmpty());
     }
 
     [Fact]
     public void Size_ShouldReturnCorrectNumberOfElements()
     {
-        // Arrange
-        var pq = new PriorityQueueImplementation<int>(5);
-        pq.Add(1);
-        pq.Add(2);
-        pq.Add(3);
+        var queue = new PriorityQueueImplementation<string>();
 
-        // Act
-        var size = pq.Size();
+        Assert.Equal(0, queue.Size());
 
-        // Assert
-        Assert.Equal(3, size);
+        queue.Add("Task 1", 1);
+        Assert.Equal(1, queue.Size());
+
+        queue.Add("Task 2", 2);
+        Assert.Equal(2, queue.Size());
+
+        queue.Poll();
+        Assert.Equal(1, queue.Size());
     }
 
     [Fact]
-    public void MixedOperations_ShouldMaintainPriorityQueueProperty()
+    public void IsEmpty_ShouldReturnTrueForEmptyQueue()
     {
-        // Arrange
-        var pq = new PriorityQueueImplementation<int>(10);
+        var queue = new PriorityQueueImplementation<string>();
 
-        // Act
-        pq.Add(15);  // [15]
-        pq.Add(10);  // [10, 15]
-        pq.Add(20);  // [10, 15, 20]
-        pq.Add(5);   // [5, 10, 20, 15]
+        Assert.True(queue.IsEmpty());
 
-        // Assert
-        Assert.Equal(5, pq.Poll()); // [10, 15, 20]
-        Assert.Equal(10, pq.Poll()); // [15, 20]
-        Assert.Equal(15, pq.Peek()); // [15, 20]
-        Assert.Equal(2, pq.Size());
+        queue.Add("Task", 1);
+        Assert.False(queue.IsEmpty());
+
+        queue.Poll();
+        Assert.True(queue.IsEmpty());
+    }
+
+    [Fact]
+    public void Poll_OnEmptyQueue_ShouldThrowInvalidOperationException()
+    {
+        var queue = new PriorityQueueImplementation<string>();
+
+        Assert.Throws<InvalidOperationException>(() => queue.Poll());
+    }
+
+    [Fact]
+    public void Peek_OnEmptyQueue_ShouldThrowInvalidOperationException()
+    {
+        var queue = new PriorityQueueImplementation<string>();
+
+        Assert.Throws<InvalidOperationException>(() => queue.Peek());
+    }
+
+    [Fact]
+    public void Add_MultipleElements_ShouldMaintainCorrectOrder()
+    {
+        var queue = new PriorityQueueImplementation<int>();
+
+        queue.Add(20, 2);
+        queue.Add(10, 1);
+        queue.Add(30, 3);
+        queue.Add(15, 1);
+
+        Assert.Equal(10, queue.Poll());
+        Assert.Equal(15, queue.Poll());
+        Assert.Equal(20, queue.Poll());
+        Assert.Equal(30, queue.Poll());
     }
 }
