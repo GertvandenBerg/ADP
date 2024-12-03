@@ -165,10 +165,22 @@ public class DynamicArrayImplementationTests
     {
         // Arrange
         var dynamicArray = new DynamicArrayImplementation<Pizza>();
-        dynamicArray.Add(new Pizza { pizzaName = "Margherita", numberOfSlices = 8 });
-        dynamicArray.Add(new Pizza { pizzaName = "Pepperoni", numberOfSlices = 10 });
+        dynamicArray.Add(new Pizza { pizzaName = "Margherita", numberOfSlices = 8, Nogiets = new Nogiets()
+        {
+            Age = 10,
+            Name = "Nogiets"
+        }});
+        dynamicArray.Add(new Pizza { pizzaName = "Pepperoni", numberOfSlices = 10, Nogiets = new Nogiets()
+        {
+            Age = 20,
+            Name = "Nogiets"
+        }});
 
-        var pizzaToFind = new Pizza { pizzaName = "Margherita", numberOfSlices = 8 };
+        var pizzaToFind = new Pizza { pizzaName = "Margherita", numberOfSlices = 8, Nogiets = new Nogiets()
+        {
+            Age = 10,
+            Name = "Nogiets"
+        }};
 
         // Act
         var contains = dynamicArray.Contains(pizzaToFind);
@@ -200,4 +212,11 @@ public class Pizza
 {
     public string pizzaName { get; set; }
     public int numberOfSlices { get; set; }
+    public Nogiets? Nogiets { get; set; }
+}
+
+public class Nogiets
+{
+    public string Name { get; set; }
+    public int Age { get; set; }
 }

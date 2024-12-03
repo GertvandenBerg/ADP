@@ -41,7 +41,7 @@ public class DynamicArrayImplementation<T>
     {
         for (int i = 0; i < _size; i++)
         {
-            if (DynamicComparable.AreEqual(_array[i],element))
+            if (_array[i].AreEqual(element))
             {
                 return true;
             }
@@ -54,7 +54,7 @@ public class DynamicArrayImplementation<T>
     {
         for (int i = 0; i < _size; i++)
         {
-            if (DynamicComparable.AreEqual(_array[i],element))
+            if (_array[i].AreEqual(element))
             {
                 return i;
             }

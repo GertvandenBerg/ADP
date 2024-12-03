@@ -133,7 +133,7 @@ public class DoublyLinkedListImplementation<T>
         var current = _head;
         while (current != null)
         {
-            if (current.Data != null && DynamicComparable.AreEqual(current.Data,data))
+            if (current.Data != null && current.Data.AreEqual(data))
             {
                 return true;
             }
@@ -150,7 +150,7 @@ public class DoublyLinkedListImplementation<T>
         var index = 0;
         while (current != null)
         {
-            if (current.Data != null &&  DynamicComparable.AreEqual(current.Data,data))
+            if (current.Data != null && current.Data.AreEqual(data))
             {
                 return index;
             }
@@ -167,7 +167,7 @@ public class DoublyLinkedListImplementation<T>
         var current = _head;
         while (current != null)
         {
-            if (current.Data != null &&  DynamicComparable.AreEqual(current.Data,data))
+            if (current.Data != null &&  current.Data.AreEqual(data))
             {
                 if (current.Prev != null)
                 {
