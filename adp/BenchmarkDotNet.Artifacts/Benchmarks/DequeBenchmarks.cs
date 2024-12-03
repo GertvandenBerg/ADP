@@ -7,9 +7,7 @@ namespace adp.BenchmarkDotNet.Artifacts.Benchmarks
     {
         private int[] _randomNumbers;
 
-        [Params(1_000, 10_000
-            // , 100_000
-            )]
+        [Params(1_000, 10_000)]
         public int ItemCount;
 
         [GlobalSetup]

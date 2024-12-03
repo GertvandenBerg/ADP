@@ -2,7 +2,7 @@
 
 public static class DynamicComparable
 {
-    public static bool AreEqual<T>(this T obj1, T obj2)
+    public static bool AreEqual<T>(T obj1, T obj2)
     {
         if (obj1 == null && obj2 == null) return true;
         if (obj1 == null || obj2 == null) return false;
@@ -18,7 +18,7 @@ public static class DynamicComparable
             var value1 = property.GetValue(obj1);
             var value2 = property.GetValue(obj2);
 
-            if (!Equals(value1, value2))
+            if (!AreEqual(value1, value2))
             {
                 return false;
             }

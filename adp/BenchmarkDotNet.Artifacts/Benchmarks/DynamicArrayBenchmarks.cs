@@ -7,7 +7,7 @@ public class DynamicArrayBenchmarks
 {
     private int[] _randomNumbers;
 
-    [Params(1_000, 10_000, 100_000)] public int ItemCount;
+    [Params(1_000, 10_000)] public int ItemCount;
 
     [GlobalSetup]
     public void Setup()
