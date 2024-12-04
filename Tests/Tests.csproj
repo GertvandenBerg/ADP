@@ -24,4 +24,10 @@
       <ProjectReference Include="..\adp\adp.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+        <None Update="TestData.json">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+    </ItemGroup>
+
 </Project>

@@ -3,7 +3,7 @@ using adp;
 namespace Tests;
 
 public class StackImplementationTests
-{
+{   
     [Fact]
     public void Push_ShouldAddElementToStack()
     {
@@ -222,6 +222,29 @@ public class StackImplementationTests
         Assert.Equal(1, stack.Size());
         Assert.Equal(pizza1, stack.Peek());
     }
+   
+    // [Fact]
+    // public void TestDataSet()
+    // {
+    //     // Load test data
+    //     var data = JsonProvider.LoadTestData();
+    //
+    //     // Initialize the stack
+    //     var stack = new StackImplementation<dynamic>();
+    //
+    //     foreach (var key in data.lijnlijst)
+    //     {
+    //         var keyValuePair = new { Key = key, Value = data[key] };
+    //         stack.Push(keyValuePair);
+    //     }
+    //
+    //     // Optionally, print the stack contents
+    //     while (stack.Count > 0)
+    //     {
+    //         var item = stack.Pop();
+    //         Console.WriteLine($"Key: {item.Key}, Value: {item.Value}");
+    //     }
+    // }
 
     // Example custom class for object tests
     public class Pizza
