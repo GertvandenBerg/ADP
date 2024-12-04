@@ -4,7 +4,7 @@ public class PriorityQueueItem<T>
 {
     public int Priority { get; set; }
     public T Value { get; set; }
-    public PriorityQueueItem<T> Next { get; set; }
+    public PriorityQueueItem<T>? Next { get; set; }
 
     public PriorityQueueItem(int priority, T value)
     {
@@ -16,18 +16,12 @@ public class PriorityQueueItem<T>
 
 public class PriorityQueueImplementation<T>
 {
-    private PriorityQueueItem<T> _head; // The head of the linked list
-
-    public PriorityQueueImplementation()
-    {
-        _head = null; // Initialize the head as null
-    }
+    private PriorityQueueItem<T>? _head = null;
 
     public void Add(T value, int priority)
     {
         var newItem = new PriorityQueueItem<T>(priority, value);
 
-        // If the list is empty or the new item has a higher priority than the head
         if (_head == null || _head.Priority > priority)
         {
             newItem.Next = _head;
@@ -35,14 +29,12 @@ public class PriorityQueueImplementation<T>
             return;
         }
 
-        // Traverse the list to find the insertion point
         var current = _head;
         while (current.Next != null && current.Next.Priority <= priority)
         {
             current = current.Next;
         }
 
-        // Insert the new item
         newItem.Next = current.Next;
         current.Next = newItem;
     }
@@ -54,7 +46,7 @@ public class PriorityQueueImplementation<T>
             throw new InvalidOperationException("Priority Queue is empty.");
         }
 
-        return _head.Value; // The head has the highest priority
+        return _head.Value; 
     }
 
     public T Poll()
@@ -64,8 +56,8 @@ public class PriorityQueueImplementation<T>
             throw new InvalidOperationException("Priority Queue is empty.");
         }
 
-        var highestPriorityItem = _head; // Store the current head
-        _head = _head.Next; // Move the head to the next item
+        var highestPriorityItem = _head; 
+        _head = _head.Next; 
         return highestPriorityItem.Value;
     }
 
