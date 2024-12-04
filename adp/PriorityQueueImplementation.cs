@@ -4,40 +4,47 @@ public class PriorityQueueItem<T>
 {
     public int Priority { get; set; }
     public T Value { get; set; }
+    public PriorityQueueItem<T> Next { get; set; }
 
     public PriorityQueueItem(int priority, T value)
     {
         Priority = priority;
         Value = value;
+        Next = null;
     }
 }
 
 public class PriorityQueueImplementation<T>
 {
-    private PriorityQueueItem<T>[] _queue;
-    private int _size;
+    private PriorityQueueItem<T> _head; // The head of the linked list
 
     public PriorityQueueImplementation()
     {
-        _queue = new PriorityQueueItem<T>[2];
-        _size = 0;
+        _head = null; // Initialize the head as null
     }
 
     public void Add(T value, int priority)
     {
-        EnsureCapacity();
-
         var newItem = new PriorityQueueItem<T>(priority, value);
-        int index = _size;
 
-        while (index > 0 && _queue[index - 1].Priority > priority)
+        // If the list is empty or the new item has a higher priority than the head
+        if (_head == null || _head.Priority > priority)
         {
-            _queue[index] = _queue[index - 1];
-            index--;
+            newItem.Next = _head;
+            _head = newItem;
+            return;
         }
 
-        _queue[index] = newItem;
-        _size++;
+        // Traverse the list to find the insertion point
+        var current = _head;
+        while (current.Next != null && current.Next.Priority <= priority)
+        {
+            current = current.Next;
+        }
+
+        // Insert the new item
+        newItem.Next = current.Next;
+        current.Next = newItem;
     }
 
     public T Peek()
@@ -47,7 +54,7 @@ public class PriorityQueueImplementation<T>
             throw new InvalidOperationException("Priority Queue is empty.");
         }
 
-        return _queue[0].Value;
+        return _head.Value; // The head has the highest priority
     }
 
     public T Poll()
@@ -57,54 +64,25 @@ public class PriorityQueueImplementation<T>
             throw new InvalidOperationException("Priority Queue is empty.");
         }
 
-        var highestPriorityItem = _queue[0];
-
-        for (int i = 1; i < _size; i++)
-        {
-            _queue[i - 1] = _queue[i];
-        }
-
-        _queue[_size - 1] = null;
-        _size--;
-
-        ShrinkCapacityIfNeeded();
+        var highestPriorityItem = _head; // Store the current head
+        _head = _head.Next; // Move the head to the next item
         return highestPriorityItem.Value;
     }
 
     public int Size()
     {
-        return _size;
+        int count = 0;
+        var current = _head;
+        while (current != null)
+        {
+            count++;
+            current = current.Next;
+        }
+        return count;
     }
 
     public bool IsEmpty()
     {
-        return _size == 0;
-    }
-
-    private void EnsureCapacity()
-    {
-        if (_size >= _queue.Length)
-        {
-            Resize(_queue.Length * 2);
-        }
-    }
-
-    private void ShrinkCapacityIfNeeded()
-    {
-        if (_size > 0 && _size <= _queue.Length / 4)
-        {
-            Resize(_queue.Length / 2);
-        }
-    }
-
-    private void Resize(int newCapacity)
-    {
-        var newQueue = new PriorityQueueItem<T>[newCapacity];
-        for (int i = 0; i < _size; i++)
-        {
-            newQueue[i] = _queue[i];
-        }
-
-        _queue = newQueue;
+        return _head == null;
     }
 }
