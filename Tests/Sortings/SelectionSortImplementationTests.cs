@@ -1,4 +1,5 @@
 ﻿using adp;
+using adp.Sortings;
 
 namespace Tests;
 
@@ -10,7 +11,7 @@ public class SelectionSortImplementationTests
         var sorter = new SelectionSortImplementation();
         int[] array = { 9, 7, 5, 3, 1 };
 
-        sorter.SelectionSort(array, (a, b) => a.CompareTo(b));
+        SelectionSortImplementation.SelectionSort(array, (a, b) => a.CompareTo(b));
 
         Assert.Equal(new int[] { 1, 3, 5, 7, 9 }, array);
     }
@@ -21,7 +22,7 @@ public class SelectionSortImplementationTests
         var sorter = new SelectionSortImplementation();
         int[] array = { 1, 3, 5, 7, 9 };
 
-        sorter.SelectionSort(array, (a, b) => b.CompareTo(a));
+        SelectionSortImplementation.SelectionSort(array, (a, b) => b.CompareTo(a));
 
         Assert.Equal(new int[] { 9, 7, 5, 3, 1 }, array);
     }
@@ -32,7 +33,7 @@ public class SelectionSortImplementationTests
         var sorter = new SelectionSortImplementation();
         string[] array = { "banana", "apple", "cherry", "date" };
 
-        sorter.SelectionSort(array, (a, b) => string.Compare(a, b));
+        SelectionSortImplementation.SelectionSort(array, (a, b) => string.Compare(a, b));
 
         Assert.Equal(new string[] { "apple", "banana", "cherry", "date" }, array);
     }
@@ -43,7 +44,7 @@ public class SelectionSortImplementationTests
         var sorter = new SelectionSortImplementation();
         int[] array = { };
 
-        sorter.SelectionSort(array, (a, b) => a.CompareTo(b));
+        SelectionSortImplementation.SelectionSort(array, (a, b) => a.CompareTo(b));
 
         Assert.Empty(array);
     }
@@ -54,7 +55,7 @@ public class SelectionSortImplementationTests
         var sorter = new SelectionSortImplementation();
         int[] array = { 42 };
 
-        sorter.SelectionSort(array, (a, b) => a.CompareTo(b));
+        SelectionSortImplementation.SelectionSort(array, (a, b) => a.CompareTo(b));
 
         Assert.Equal(new int[] { 42 }, array);
     }
@@ -65,7 +66,7 @@ public class SelectionSortImplementationTests
         var sorter = new SelectionSortImplementation();
         int[] array = { 1, 2, 3, 4, 5 };
 
-        sorter.SelectionSort(array, (a, b) => a.CompareTo(b));
+        SelectionSortImplementation.SelectionSort(array, (a, b) => a.CompareTo(b));
 
         Assert.Equal(new int[] { 1, 2, 3, 4, 5 }, array);
     }
@@ -76,7 +77,7 @@ public class SelectionSortImplementationTests
         var sorter = new SelectionSortImplementation();
         int[] array = { 5, 4, 3, 2, 1 };
 
-        sorter.SelectionSort(array, (a, b) => a.CompareTo(b));
+        SelectionSortImplementation.SelectionSort(array, (a, b) => a.CompareTo(b));
 
         Assert.Equal(new int[] { 1, 2, 3, 4, 5 }, array);
     }
@@ -92,7 +93,7 @@ public class SelectionSortImplementationTests
             new Person { Name = "Bob", Age = 20 }
         };
 
-        sorter.SelectionSort(people, (a, b) => a.Age.CompareTo(b.Age));
+        SelectionSortImplementation.SelectionSort(people, (a, b) => a.Age.CompareTo(b.Age));
 
         Assert.Equal("Bob", people[0].Name);
         Assert.Equal("John", people[1].Name);

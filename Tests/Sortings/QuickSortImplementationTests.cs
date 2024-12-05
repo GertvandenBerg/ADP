@@ -1,6 +1,7 @@
 ﻿using adp;
+using adp.Sortings;
 
-namespace Tests;
+namespace Tests.Sortings;
 
 public class QuickSortImplementationTests
 {
@@ -8,22 +9,22 @@ public class QuickSortImplementationTests
     public void QuickSort_SortsIntegersInAscendingOrder()
     {
         var sorter = new QuickSortImplementation();
-        int[] array = { 9, 7, 5, 3, 1 };
+        int[] array = [9, 7, 5, 3, 1];
 
-        sorter.QuickSort(array, (a, b) => a.CompareTo(b));
+        QuickSortImplementation.QuickSort(array, (a, b) => a.CompareTo(b));
 
-        Assert.Equal(new int[] { 1, 3, 5, 7, 9 }, array);
+        Assert.Equal([1, 3, 5, 7, 9], array);
     }
 
     [Fact]
     public void QuickSort_SortsIntegersInDescendingOrder()
     {
         var sorter = new QuickSortImplementation();
-        int[] array = { 1, 3, 5, 7, 9 };
+        int[] array = [1, 3, 5, 7, 9];
 
-        sorter.QuickSort(array, (a, b) => b.CompareTo(a));
+        QuickSortImplementation.QuickSort(array, (a, b) => b.CompareTo(a));
 
-        Assert.Equal(new int[] { 9, 7, 5, 3, 1 }, array);
+        Assert.Equal([9, 7, 5, 3, 1], array);
     }
 
     [Fact]
@@ -32,9 +33,9 @@ public class QuickSortImplementationTests
         var sorter = new QuickSortImplementation();
         string[] array = { "banana", "apple", "cherry", "date" };
 
-        sorter.QuickSort(array, (a, b) => string.CompareOrdinal(a, b));
+        QuickSortImplementation.QuickSort(array, (a, b) => string.CompareOrdinal(a, b));
 
-        Assert.Equal(new string[] { "apple", "banana", "cherry", "date" }, array);
+        Assert.Equal(["apple", "banana", "cherry", "date"], array);
     }
 
     [Fact]
@@ -43,18 +44,18 @@ public class QuickSortImplementationTests
         var sorter = new QuickSortImplementation();
         string[] array = { "banana", "apple", "cherry", "date" };
 
-        sorter.QuickSort(array, (a, b) => string.CompareOrdinal(b, a));
+        QuickSortImplementation.QuickSort(array, (a, b) => string.CompareOrdinal(b, a));
 
-        Assert.Equal(new string[] { "date", "cherry", "banana", "apple" }, array);
+        Assert.Equal(["date", "cherry", "banana", "apple"], array);
     }
 
     [Fact]
     public void QuickSort_HandlesEmptyArray()
     {
         var sorter = new QuickSortImplementation();
-        int[] array = { };
+        int[] array = [];
 
-        sorter.QuickSort(array, (a, b) => a.CompareTo(b));
+        QuickSortImplementation.QuickSort(array, (a, b) => a.CompareTo(b));
 
         Assert.Empty(array);
     }
@@ -63,22 +64,22 @@ public class QuickSortImplementationTests
     public void QuickSort_HandlesSingleElementArray()
     {
         var sorter = new QuickSortImplementation();
-        int[] array = { 42 };
+        int[] array = [42];
 
-        sorter.QuickSort(array, (a, b) => a.CompareTo(b));
+        QuickSortImplementation.QuickSort(array, (a, b) => a.CompareTo(b));
 
-        Assert.Equal(new int[] { 42 }, array);
+        Assert.Equal([42], array);
     }
 
     [Fact]
     public void QuickSort_HandlesAlreadySortedArray()
     {
         var sorter = new QuickSortImplementation();
-        int[] array = { 1, 2, 3, 4, 5 };
+        int[] array = [1, 2, 3, 4, 5];
 
-        sorter.QuickSort(array, (a, b) => a.CompareTo(b));
+        QuickSortImplementation.QuickSort(array, (a, b) => a.CompareTo(b));
 
-        Assert.Equal(new int[] { 1, 2, 3, 4, 5 }, array);
+        Assert.Equal([1, 2, 3, 4, 5], array);
     }
 
     [Fact]
@@ -87,9 +88,9 @@ public class QuickSortImplementationTests
         var sorter = new QuickSortImplementation();
         int[] array = { 5, 4, 3, 2, 1 };
 
-        sorter.QuickSort(array, (a, b) => a.CompareTo(b));
+        QuickSortImplementation.QuickSort(array, (a, b) => a.CompareTo(b));
 
-        Assert.Equal(new int[] { 1, 2, 3, 4, 5 }, array);
+        Assert.Equal([1, 2, 3, 4, 5], array);
     }
 
     [Fact]
@@ -103,7 +104,7 @@ public class QuickSortImplementationTests
             new Person { Name = "Bob", Age = 20 }
         };
 
-        sorter.QuickSort(people, (a, b) => a.Age.CompareTo(b.Age));
+        QuickSortImplementation.QuickSort(people, (a, b) => a.Age.CompareTo(b.Age));
 
         Assert.Equal("Bob", people[0].Name);
         Assert.Equal("John", people[1].Name);

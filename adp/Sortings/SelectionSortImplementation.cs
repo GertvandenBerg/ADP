@@ -1,14 +1,14 @@
-﻿namespace adp;
+﻿namespace adp.Sortings;
 
 public class SelectionSortImplementation
 {
-    public void SelectionSort<T>(T[] array, Func<T, T, int> customComparer)
+    public static void SelectionSort<T>(T[] array, Func<T, T, int> customComparer)
     {
-        for (int i = 0; i < array.Length - 1; i++)
+        for (var i = 0; i < array.Length - 1; i++)
         {
-            int minIndex = i;
+            var minIndex = i;
 
-            for (int j = i + 1; j < array.Length; j++)
+            for (var j = i + 1; j < array.Length; j++)
             {
                 if (customComparer(array[j], array[minIndex]) < 0)
                 {

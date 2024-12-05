@@ -1,7 +1,7 @@
 ﻿using adp;
-using Xunit;
+using adp.Sortings;
 
-namespace Tests;
+namespace Tests.Sortings;
 
 public class ParallelMergeSortImplementationTests
 {
@@ -58,7 +58,7 @@ public class ParallelMergeSortImplementationTests
     [Fact]
     public void ParallelMergeSort_HandlesSingleElementArray()
     {
-        int[] array = { 42 };
+        int[] array = [42];
 
         ParallelMergeSortImplementation.ParallelMergeSort(array, (a, b) => a.CompareTo(b));
 
@@ -78,7 +78,7 @@ public class ParallelMergeSortImplementationTests
     [Fact]
     public void ParallelMergeSort_HandlesReverseSortedArray()
     {
-        int[] array = { 5, 4, 3, 2, 1 };
+        int[] array = [5, 4, 3, 2, 1];
 
         ParallelMergeSortImplementation.ParallelMergeSort(array, (a, b) => a.CompareTo(b));
 

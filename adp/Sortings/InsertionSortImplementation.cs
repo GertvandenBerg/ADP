@@ -1,13 +1,13 @@
-﻿namespace adp;
+﻿namespace adp.Sortings;
 
 public class InsertionSortImplementation
 {
-    public void InsertionSort<T>(T[] array, Func<T, T, int> customComparer)
+    public static void InsertionSort<T>(T[] array, Func<T, T, int> customComparer)
     {
-        for (int i = 1; i < array.Length; i++)
+        for (var i = 1; i < array.Length; i++)
         {
-            T key = array[i];
-            int j = i - 1;
+            var key = array[i];
+            var j = i - 1;
 
             while (j >= 0 && customComparer(array[j], key) > 0)
             {
