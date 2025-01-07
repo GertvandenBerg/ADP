@@ -2,9 +2,10 @@
 
 public class QuickSortImplementation
 {
-    public static void QuickSort<T>(T[] array, Func<T, T, int> customComparer)
+    public static T[] QuickSort<T>(T[] array, Func<T, T, int> customComparer)
     {
         QuickSort(array, 0, array.Length - 1, customComparer);
+        return array;
     }
 
     private static void QuickSort<T>(T[] array, int low, int high, Func<T, T, int> customComparer)

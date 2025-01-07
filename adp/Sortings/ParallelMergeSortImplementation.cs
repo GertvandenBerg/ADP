@@ -2,15 +2,17 @@
 
 public static class ParallelMergeSortImplementation
 {
-    public static void ParallelMergeSort<T>(T[] array, Func<T, T, int> comparer)
+    public static T[] ParallelMergeSort<T>(T[] array, Func<T, T, int> comparer)
     {
         if (array.Length <= 1)
         {
-            return;
+            return array;
         }
             
         var temp = new T[array.Length];
         ParallelMergeSort(array, temp, 0, array.Length - 1, comparer);
+        
+        return array;
     }
 
     private static void ParallelMergeSort<T>(T[] array, T[] temp, int left, int right, Func<T, T, int> comparer)

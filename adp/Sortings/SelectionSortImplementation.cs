@@ -2,7 +2,7 @@
 
 public class SelectionSortImplementation
 {
-    public static void SelectionSort<T>(T[] array, Func<T, T, int> customComparer)
+    public static T[] SelectionSort<T>(T[] array, Func<T, T, int> customComparer)
     {
         for (var i = 0; i < array.Length - 1; i++)
         {
@@ -26,5 +26,7 @@ public class SelectionSortImplementation
             array[i] = array[minIndex];
             array[minIndex] = temp;
         }
+        
+        return array;
     }
 }

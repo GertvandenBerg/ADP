@@ -2,7 +2,7 @@
 
 public class InsertionSortImplementation
 {
-    public static void InsertionSort<T>(T[] array, Func<T, T, int> customComparer)
+    public static T[] InsertionSort<T>(T[] array, Func<T, T, int> customComparer)
     {
         for (var i = 1; i < array.Length; i++)
         {
@@ -17,5 +17,7 @@ public class InsertionSortImplementation
 
             array[j + 1] = key;
         }
+        
+        return array;
     }
 }

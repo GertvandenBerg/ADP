@@ -174,7 +174,6 @@ public class BinarySearchImplementationTests
         
         // Act
         var binarySearch = BinarySearchImplementation.BinarySearch(dataset.LijstGesorteerdOplopend3, 1, (a, b) => a.CompareTo(b));
-
         
         // Assert
         Assert.Equal(0, binarySearch);
@@ -188,7 +187,6 @@ public class BinarySearchImplementationTests
         
         // Act
         var binarySearch = BinarySearchImplementation.BinarySearch(dataset.LijstHerhaald1000, 1, (a, b) => a.CompareTo(b));
-
         
         // Assert
         Assert.Equal(4999, binarySearch);
@@ -203,7 +201,6 @@ public class BinarySearchImplementationTests
         
         // Act
         var binarySearch = BinarySearchImplementation.BinarySearch(dataset.LijstLeeg0, 1, (a, b) => a.CompareTo(b));
-
         
         // Assert
         Assert.Equal(-1, binarySearch);
@@ -235,7 +232,6 @@ public class BinarySearchImplementationTests
 
             return a.Value.CompareTo(b.Value);
         });
-
         
         // Assert
         Assert.Equal(-1, binarySearch);
@@ -280,7 +276,6 @@ public class BinarySearchImplementationTests
         
         // Act
         var binarySearch = BinarySearchImplementation.BinarySearch(dataset.LijstOnsorteerbaar3, 1, (_, _) => 0);
-
         
         // Assert
         Assert.Equal(1, binarySearch);
@@ -307,7 +302,6 @@ public class BinarySearchImplementationTests
         
         // Act
         var binarySearch = BinarySearchImplementation.BinarySearch(dataset.LijstWillekeurig10000, 1, (a, b) => a.CompareTo(b));
-
         
         // Assert
         Assert.Equal(-1, binarySearch);
@@ -321,7 +315,6 @@ public class BinarySearchImplementationTests
         
         // Act
         var binarySearch = BinarySearchImplementation.BinarySearch(dataset.LijstWillekeurig3, 1, (_, _) => 0);
-
         
         // Assert
         Assert.Equal(1, binarySearch);

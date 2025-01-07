@@ -99,6 +99,212 @@ public class SelectionSortImplementationTests
         Assert.Equal("John", people[1].Name);
         Assert.Equal("Alice", people[2].Name);
     }
+    
+    [Fact]
+    public void HandleDatasetLijstAflopend2()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        // Act
+        var sortedArray = SelectionSortImplementation.SelectionSort(dataset.LijstAflopend2, (a, b) => a.CompareTo(b));
+        
+        // Assert
+        Assert.Equal(-10033224, sortedArray[0]);
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstOplopend2()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        // Act
+        var sortedArray = SelectionSortImplementation.SelectionSort(dataset.LijstOplopend2, (a, b) => a.CompareTo(b));
+        
+        // Assert
+        Assert.Equal(-100324, sortedArray[0]);
+    }
+
+    [Fact]
+    public void HandleDatasetLijstFloat8001()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        // Act
+        var sortedArray = SelectionSortImplementation.SelectionSort(dataset.LijstFloat8001, (a, b) => a.CompareTo(b));
+        
+        // Assert
+        Assert.Equal(-0, sortedArray[0]);
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstGesorteerdAflopend3()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        // Act
+        var sortedArray = SelectionSortImplementation.SelectionSort(dataset.LijstGesorteerdAflopend3, (a, b) => a.CompareTo(b));
+        
+        // Assert
+        Assert.Equal(1, sortedArray[0]);
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstGesorteerdOplopend3()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        // Act
+        var sortedArray = SelectionSortImplementation.SelectionSort(dataset.LijstGesorteerdOplopend3, (a, b) => a.CompareTo(b));
+        
+        // Assert
+        Assert.Equal(1, sortedArray[0]);
+    }
+
+    [Fact]
+    public void HandleDatasetLijstHerhaald1000()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        // Act
+        var sortedArray = SelectionSortImplementation.SelectionSort(dataset.LijstHerhaald1000, (a, b) => a.CompareTo(b));
+        
+        // Assert
+        Assert.Equal(-1, sortedArray[0]);
+    }
+    
+    
+    [Fact]
+    public void HandleDatasetLijstLeeg0()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        // Act
+        var sortedArray = SelectionSortImplementation.SelectionSort(dataset.LijstLeeg0, (a, b) => a.CompareTo(b));
+        
+        // Assert
+        Assert.Equal(default, sortedArray.FirstOrDefault());
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstNull1()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        // Act
+        var sortedArray = SelectionSortImplementation.SelectionSort(dataset.LijstNull1, (a, b) =>
+        {
+            if (a == null && b == null)
+            {
+                return 0;
+            }
+
+            if (a == null)
+            {
+                return -1;
+            }
+
+            if (b == null)
+            {
+                return 1;
+            }
+
+            return a.Value.CompareTo(b.Value);
+        });
+        
+        // Assert
+        Assert.Null(sortedArray[0]);
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstNull3()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        // Act
+        var sortedArray = SelectionSortImplementation.SelectionSort(dataset.LijstNull3, (a, b) =>
+        {
+            if (a == null && b == null)
+            {
+                return 0;
+            }
+
+            if (a == null)
+            {
+                return -1;
+            }
+
+            if (b == null)
+            {
+                return 1;
+            }
+
+            return a.Value.CompareTo(b.Value);
+        });
+        
+        // Assert
+        Assert.Null(sortedArray[0]);
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstOnsorteerbaar3()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        // Act
+        var sortedArray = SelectionSortImplementation.SelectionSort(dataset.LijstOnsorteerbaar3, (_, _) => 0);
+        
+        // Assert
+        Assert.Equal("1", sortedArray[0].ToString());
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstOplopend10000()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        // Act
+        var sortedArray = SelectionSortImplementation.SelectionSort(dataset.LijstGesorteerdOplopend3, (a, b) => a.CompareTo(b));
+        
+        // Assert
+        Assert.Equal(1, sortedArray[0]);
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstWillekeurig10000()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        // Act
+        var sortedArray = SelectionSortImplementation.SelectionSort(dataset.LijstWillekeurig10000, (a, b) => a.CompareTo(b));
+        
+        // Assert
+        Assert.Equal(1, sortedArray[0]);
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstWillekeurig3()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        // Act
+        var sortedArray = SelectionSortImplementation.SelectionSort(dataset.LijstWillekeurig3, (_, _) => 0);
+        
+        // Assert
+        Assert.Equal(1, sortedArray[0]);
+    }
 
     private class Person
     {
