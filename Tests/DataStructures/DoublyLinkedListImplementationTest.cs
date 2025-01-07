@@ -219,4 +219,239 @@ public class DoublyLinkedListImplementationTests
         Assert.Equal(3, list.Get(1));
         Assert.Equal(4, list.Get(2));
     }
+    
+    [Fact]
+    public void HandleDatasetLijstAflopend2()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var linkedList = new DoublyLinkedListImplementation<int>();
+        
+        // Act
+        foreach (var item in dataset.LijstAflopend2)
+        {
+            linkedList.Add(item);
+        }
+        
+        // Assert
+        Assert.Equal(1, linkedList.Get(0));
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstOplopend2()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var linkedList = new DoublyLinkedListImplementation<int>();
+        
+        // Act
+        foreach (var item in dataset.LijstOplopend2)
+        {
+            linkedList.Add(item);
+        }
+        
+        // Assert
+        Assert.Equal(-100324, linkedList.Get(0));
+    }
+
+    [Fact]
+    public void HandleDatasetLijstFloat8001()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var linkedList = new DoublyLinkedListImplementation<float>();
+        
+        // Act
+        foreach (var item in dataset.LijstFloat8001)
+        {
+            linkedList.Add(item);
+        }
+        
+        // Assert
+        Assert.Equal(-0.0, linkedList.Get(0));
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstGesorteerdAflopend3()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var linkedList = new DoublyLinkedListImplementation<float>();
+        
+        // Act
+        foreach (var item in dataset.LijstGesorteerdAflopend3)
+        {
+            linkedList.Add(item);
+        }
+        
+        // Assert
+        Assert.Equal(3, linkedList.Get(0));
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstGesorteerdOplopend3()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var linkedList = new DoublyLinkedListImplementation<float>();
+        
+        // Act
+        foreach (var item in dataset.LijstGesorteerdOplopend3)
+        {
+            linkedList.Add(item);
+        }
+        
+        // Assert
+        Assert.Equal(1, linkedList.Get(0));
+    }
+
+    [Fact]
+    public void HandleDatasetLijstHerhaald1000()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var linkedList = new DoublyLinkedListImplementation<float>();
+        
+        // Act
+        foreach (var item in dataset.LijstHerhaald1000)
+        {
+            linkedList.Add(item);
+        }
+        
+        // Assert
+        Assert.Equal(1, linkedList.Get(0));
+    }
+    
+    
+    [Fact]
+    public void HandleDatasetLijstLeeg0()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var linkedList = new DoublyLinkedListImplementation<float>();
+        
+        // Act
+        foreach (var item in dataset.LijstLeeg0)
+        {
+            linkedList.Add(item);
+        }
+        
+        // Assert
+        Assert.Throws<IndexOutOfRangeException>(() => linkedList.Get(0));
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstNull1()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var linkedList = new DoublyLinkedListImplementation<int?>();
+        
+        // Act
+        foreach (var item in dataset.LijstNull1)
+        {
+            linkedList.Add(item);
+        }
+        
+        // Assert
+        Assert.Null(linkedList.Get(0));
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstNull3()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var linkedList = new DoublyLinkedListImplementation<int?>();
+        
+        // Act
+        foreach (var item in dataset.LijstNull3)
+        {
+            linkedList.Add(item);
+        }
+        
+        // Assert
+        Assert.Equal(1, linkedList.Get(0));
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstOnsorteerbaar3()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var linkedList = new DoublyLinkedListImplementation<object>();
+        
+        // Act
+        foreach (var item in dataset.LijstOnsorteerbaar3)
+        {
+            linkedList.Add(item);
+        }
+        
+        // Assert
+        Assert.Equal(1, int.Parse(linkedList.Get(0).ToString()));
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstOplopend10000()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var linkedList = new DoublyLinkedListImplementation<int>();
+        
+        // Act
+        foreach (var item in dataset.LijstOplopend10000)
+        {
+            linkedList.Add(item);
+        }
+        
+        // Assert
+        Assert.Equal(1, linkedList.Get(0));
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstWillekeurig10000()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var linkedList = new DoublyLinkedListImplementation<int>();
+        
+        // Act
+        foreach (var item in dataset.LijstWillekeurig10000)
+        {
+            linkedList.Add(item);
+        }
+        
+        // Assert
+        Assert.Equal(5824, linkedList.Get(0));
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstWillekeurig3()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var linkedList = new DoublyLinkedListImplementation<int>();
+        
+        // Act
+        foreach (var item in dataset.LijstWillekeurig3)
+        {
+            linkedList.Add(item);
+        }
+        
+        // Assert
+        Assert.Equal(1, linkedList.Get(0));
+    }
 }

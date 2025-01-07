@@ -27,13 +27,13 @@ public class BinarySearchBenchmarks
     public int SearchExistingElement()
     {
         var searcher = new BinarySearchImplementation();
-        return searcher.BinarySearch(_sortedArray, _targetExists, (a, b) => a.CompareTo(b));
+        return BinarySearchImplementation.BinarySearch(_sortedArray, _targetExists, (a, b) => a.CompareTo(b));
     }
 
     [Benchmark]
     public int SearchNonExistingElement()
     {
         var searcher = new BinarySearchImplementation();
-        return searcher.BinarySearch(_sortedArray, _targetDoesNotExist, (a, b) => a.CompareTo(b));
+        return BinarySearchImplementation.BinarySearch(_sortedArray, _targetDoesNotExist, (a, b) => a.CompareTo(b));
     }
 }

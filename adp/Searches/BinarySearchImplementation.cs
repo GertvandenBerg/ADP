@@ -2,7 +2,7 @@
 
 public class BinarySearchImplementation
 {
-    public int BinarySearch<T>(T[] sortedArray, T target, Func<T, T, int> customComparer)
+    public static int BinarySearch<T>(T[] sortedArray, T target, Func<T, T, int> customComparer)
     {
         int left = 0;
         int right = sortedArray.Length - 1;

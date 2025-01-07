@@ -223,29 +223,241 @@ public class StackImplementationTests
         Assert.Equal(pizza1, stack.Peek());
     }
    
-    // [Fact]
-    // public void TestDataSet()
-    // {
-    //     // Load test data
-    //     var data = JsonProvider.LoadTestData();
-    //
-    //     // Initialize the stack
-    //     var stack = new StackImplementation<dynamic>();
-    //
-    //     foreach (var key in data.lijnlijst)
-    //     {
-    //         var keyValuePair = new { Key = key, Value = data[key] };
-    //         stack.Push(keyValuePair);
-    //     }
-    //
-    //     // Optionally, print the stack contents
-    //     while (stack.Count > 0)
-    //     {
-    //         var item = stack.Pop();
-    //         Console.WriteLine($"Key: {item.Key}, Value: {item.Value}");
-    //     }
-    // }
+[Fact]
+    public void HandleDatasetLijstAflopend2()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var dynamicArray = new StackImplementation<int>();
+        
+        // Act
+        foreach (var item in dataset.LijstAflopend2)
+        {
+            dynamicArray.Push(item);
+        }
+        
+        // Assert
+        Assert.Equal(-10033224, dynamicArray.Peek());
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstOplopend2()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var stack = new StackImplementation<int>();
+        
+        // Act
+        foreach (var item in dataset.LijstOplopend2)
+        {
+            stack.Push(item);
+        }
+        
+        // Assert
+        Assert.Equal(1023, stack.Peek());
+    }
 
+    [Fact]
+    public void HandleDatasetLijstFloat8001()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var stack = new StackImplementation<float>();
+        
+        // Act
+        foreach (var item in dataset.LijstFloat8001)
+        {
+            stack.Push(item);
+        }
+        
+        // Assert
+        Assert.Equal(-0.0, stack.Peek());
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstGesorteerdAflopend3()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var stack = new StackImplementation<float>();
+        
+        // Act
+        foreach (var item in dataset.LijstGesorteerdAflopend3)
+        {
+            stack.Push(item);
+        }
+        
+        // Assert
+        Assert.Equal(1, stack.Peek());
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstGesorteerdOplopend3()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var stack = new StackImplementation<float>();
+        
+        // Act
+        foreach (var item in dataset.LijstGesorteerdOplopend3)
+        {
+            stack.Push(item);
+        }
+        
+        // Assert
+        Assert.Equal(3, stack.Peek());
+    }
+
+    [Fact]
+    public void HandleDatasetLijstHerhaald1000()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var stack = new StackImplementation<float>();
+        
+        // Act
+        foreach (var item in dataset.LijstHerhaald1000)
+        {
+            stack.Push(item);
+        }
+        
+        // Assert
+        Assert.Equal(1, stack.Peek());
+    }
+    
+    
+    [Fact]
+    public void HandleDatasetLijstLeeg0()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var stack = new StackImplementation<float>();
+        
+        // Act
+        foreach (var item in dataset.LijstLeeg0)
+        {
+            stack.Push(item);
+        }
+        
+        // Assert
+        Assert.Throws<InvalidOperationException>(() => stack.Peek());
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstNull1()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var stack = new StackImplementation<int?>();
+        
+        // Act
+        foreach (var item in dataset.LijstNull1)
+        {
+            stack.Push(item);
+        }
+        
+        // Assert
+        Assert.Null(stack.Peek());
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstNull3()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var stack = new StackImplementation<int?>();
+        
+        // Act
+        foreach (var item in dataset.LijstNull3)
+        {
+            stack.Push(item);
+        }
+        
+        // Assert
+        Assert.Equal(3, stack.Peek());
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstOnsorteerbaar3()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var stack = new StackImplementation<object>();
+        
+        // Act
+        foreach (var item in dataset.LijstOnsorteerbaar3)
+        {
+            stack.Push(item);
+        }
+        
+        // Assert
+        Assert.Equal("string", stack.Peek().ToString());
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstOplopend10000()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var stack = new StackImplementation<int>();
+        
+        // Act
+        foreach (var item in dataset.LijstOplopend10000)
+        {
+            stack.Push(item);
+        }
+        
+        // Assert
+        Assert.Equal(9999, stack.Peek());
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstWillekeurig10000()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var stack = new StackImplementation<int>();
+        
+        // Act
+        foreach (var item in dataset.LijstWillekeurig10000)
+        {
+            stack.Push(item);
+        }
+        
+        // Assert
+        Assert.Equal(8009, stack.Peek());
+    }
+    
+    [Fact]
+    public void HandleDatasetLijstWillekeurig3()
+    {
+        // Arrange
+        var dataset = JsonProvider.LoadSortData();
+        
+        var stack = new StackImplementation<int>();
+        
+        // Act
+        foreach (var item in dataset.LijstWillekeurig3)
+        {
+            stack.Push(item);
+        }
+        
+        // Assert
+        Assert.Equal(2, stack.Peek());
+    }
+    
     // Example custom class for object tests
     public class Pizza
     {
