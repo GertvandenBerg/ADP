@@ -18,6 +18,13 @@ public static class JsonProvider
         
         return System.Text.Json.JsonSerializer.Deserialize<SortDataset>(jsonData);
     }
+
+    public static HashingDataset LoadHashingDataset()
+    {
+        var jsonData = File.ReadAllText("Datasets/HashingDataset.json");
+        
+        return System.Text.Json.JsonSerializer.Deserialize<HashingDataset>(jsonData);
+    }
 }
 
 public class SortDataset
@@ -62,6 +69,13 @@ public class SortDataset
     public int[] LijstWillekeurig3 { get; set; }
     
 }
+
+public class HashingDataset
+{
+    [JsonPropertyName("hashtabelsleutelswaardes")]
+    public Dictionary<string, int[]> Hashtabelsleutelswaardes { get; set; }
+}
+
 
 public class Dataset
 {
