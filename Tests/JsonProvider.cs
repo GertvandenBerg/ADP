@@ -25,6 +25,12 @@ public static class JsonProvider
         
         return System.Text.Json.JsonSerializer.Deserialize<HashingDataset>(jsonData);
     }
+
+    public static GraphDataset LoadGraphDataset()
+    {
+        var jsonData = File.ReadAllText("Datasets/GraphDataset.json");
+        return System.Text.Json.JsonSerializer.Deserialize<GraphDataset>(jsonData);
+    }
 }
 
 public class SortDataset
@@ -76,6 +82,28 @@ public class HashingDataset
     public Dictionary<string, int[]> Hashtabelsleutelswaardes { get; set; }
 }
 
+public class GraphDataset
+{
+    // lijnlijst
+    [JsonPropertyName("lijnlijst")]
+    public int[][] Lijnlijst { get; set; }
+    //     verbindingslijst
+    [JsonPropertyName("verbindingslijst")]
+    public int[][] Verbindingslijst { get; set; }
+    // verbindingsmatrix
+    [JsonPropertyName("verbindingsmatrix")]
+    public int[][] Verbindingsmatrix { get; set; }
+    //     lijnlijst_gewogen
+    [JsonPropertyName("lijnlijst_gewogen")]
+    public int[][] LijnlijstGewogen { get; set; }
+    // verbindingslijst_gewogen
+    [JsonPropertyName("verbindingslijst_gewogen")]
+    public int[][][] VerbindingslijstGewogen { get; set; }
+    //     verbindingsmatrix_gewogen
+    [JsonPropertyName("verbindingsmatrix_gewogen")]
+    public int[][] VerbindingsmatrixGewogen { get; set; }
+    
+}
 
 public class Dataset
 {
