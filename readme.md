@@ -1,4 +1,4 @@
-﻿[![Open in GitHub Codespaces](https://codespaces.new/GertvandenBerg/ADP)
+﻿[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/GertvandenBerg/ADP)
 
 To run the test you have to follow the next steps
 
