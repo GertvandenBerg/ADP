@@ -1,6 +1,6 @@
 using adp;
 
-namespace Tests;
+namespace Tests.DataStructures;
 
 public class DynamicArrayImplementationTests
 {

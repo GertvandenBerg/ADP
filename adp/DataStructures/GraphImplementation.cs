@@ -46,29 +46,21 @@ public class GraphImplementation
         {
             _adjacencyList[src].Add((dest, weight));
         }
-
-        if (!_adjacencyList[dest].Contains((src, weight)))
-        {
-            _adjacencyList[dest].Add((src, weight));
-        }
     }
 
     public int[] FindShortestPath(int startVertex, int targetVertex)
     {
-        // Check if the graph is weighted
         var isWeighted = _adjacencyList.Any(kvp => kvp.Value.Any(edge => edge.weight > 1));
 
         if (isWeighted)
         {
             return Dijkstra(startVertex, targetVertex);
         }
-        else
-        {
-            return BFS(startVertex, targetVertex);
-        }
+        
+        return Bfs(startVertex, targetVertex);
     }
 
-    private int[] BFS(int startVertex, int targetVertex)
+    private int[] Bfs(int startVertex, int targetVertex)
     {
         var visited = new HashSet<int>();
         var queue = new Queue<int>();
@@ -160,10 +152,5 @@ public class GraphImplementation
 
         path.Reverse();
         return path.ToArray();
-    }
-
-    public Dictionary<int, List<(int neighbor, int weight)>> GetAdjacencyList()
-    {
-        return _adjacencyList;
     }
 }

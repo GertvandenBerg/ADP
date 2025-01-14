@@ -1,7 +1,6 @@
 ﻿using adp.DataStructures;
-using Tests;
 
-namespace adp.Datastructures.Tests;
+namespace Tests.DataStructures;
 
 public class GraphImplementationTests
 {
