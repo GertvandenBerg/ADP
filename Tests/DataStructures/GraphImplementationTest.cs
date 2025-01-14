@@ -48,7 +48,7 @@ public class GraphImplementationTests
         var path = graph.FindShortestPath(0, 0);
 
         // Assert
-        Assert.Equal(new[] { 0 }, path);
+        Assert.Equal([0], path);
     }
 
     [Fact]
@@ -62,7 +62,7 @@ public class GraphImplementationTests
         var path = graph.FindShortestPath(0, 1);
 
         // Assert
-        Assert.Equal(new[] { 0, 1 }, path);
+        Assert.Equal([0, 1], path);
     }
 
     [Fact]
@@ -78,7 +78,7 @@ public class GraphImplementationTests
         var path = graph.FindShortestPath(0, 2);
 
         // Assert
-        Assert.Equal(new[] { 0, 1, 2 }, path);
+        Assert.Equal([0, 1, 2], path);
     }
 
     [Fact]
@@ -94,7 +94,7 @@ public class GraphImplementationTests
         var path = graph.FindShortestPath(0, 3);
 
         // Assert
-        Assert.Equal(new[] { 0, 1, 2, 3 }, path);
+        Assert.Equal([0, 1, 2, 3], path);
     }
 
     [Fact]
@@ -139,6 +139,6 @@ public class GraphImplementationTests
         var path = graph.FindShortestPath(0, 2);
 
         // Assert
-        Assert.Equal(new[] { 0, 1, 2 }, path);
+        Assert.Equal([0, 1, 2], path);
     }
 }
